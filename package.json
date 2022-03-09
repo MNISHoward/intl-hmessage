@@ -52,5 +52,9 @@
   },
   "dependencies": {
     "intl-messageformat": "^9.11.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
