@@ -22,6 +22,9 @@
     "internation",
     "js"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "451006700@qq.com",
   "license": "MIT",
   "bugs": {
