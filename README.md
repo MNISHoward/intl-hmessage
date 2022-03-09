@@ -19,7 +19,7 @@ The hmessage is base on <a href="https://formatjs.io/docs/intl-messageformat/" >
 **Normal:**
 
 ```javascript
-import { Lang, Message, DefaultPlugin } from "@/myLocale/index";
+import { Lang, Message, DefaultPlugin } from "intl-hmessage";
 
 Lang.use(DefaultPlugin);
 
@@ -47,7 +47,7 @@ console.log(intl.get("t1"));
 If you using react or preact, you can use getHtml to genernate v-node.
 
 ```javascript
-import { Lang, Message, DefaultPlugin } from "@/myLocale/index";
+import { Lang, Message, DefaultPlugin } from "intl-hmessage";
 
 Lang.use(DefaultPlugin);
 
