@@ -1,6 +1,6 @@
 type Plugin = {
   getCurrentLang: () => string;
-  listen: (cb: Plugin['getCurrentLang']) => void;
+  listen: (cb: Plugin["getCurrentLang"]) => void;
 };
 
 export default class Lang {
@@ -10,8 +10,12 @@ export default class Lang {
 
   static plugin: Plugin = {
     getCurrentLang: () => null,
-    listen: (updateLang: Lang['updateLang']) => null,
+    listen: () => null,
   };
+
+  static use(plugin: Plugin) {
+    Lang.plugin = plugin;
+  }
 
   constructor(defaultLang?: string) {
     this._default = defaultLang;
@@ -21,7 +25,7 @@ export default class Lang {
 
   updateLang(lang: string) {
     this._currentLang = lang;
-    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute("lang", lang);
     this._updateMeta();
   }
 

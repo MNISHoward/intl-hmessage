@@ -1,5 +1,5 @@
-import IntlMessageFormat from 'intl-messageformat';
-import Lang from './lang';
+import IntlMessageFormat from "intl-messageformat";
+import Lang from "./lang";
 
 type ConfigType = {
   [key: string]: object;
@@ -11,19 +11,23 @@ export default class Message {
   private _lang: Lang = null;
   private _createElement = null;
 
-  constructor(config: ConfigType, lang: Lang, createElement: any) {
+  constructor(config: ConfigType, lang: Lang, createElement?: unknown) {
     this._metas = config.metas;
     this._lang = lang;
     this._lang.setUpdateMeta(this.updateMeta);
     this._createElement = createElement;
+    this.updateMeta();
   }
 
   updateMeta() {
     const lang = this._lang.getLang();
-    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute("lang", lang);
     this._currentMeta = this._metas[lang];
-    if ((this._currentMeta === null || this._currentMeta === undefined) && lang.includes('-')) {
-      const backupLang = lang.split('-')[0];
+    if (
+      (this._currentMeta === null || this._currentMeta === undefined) &&
+      lang.includes("-")
+    ) {
+      const backupLang = lang.split("-")[0];
       this._currentMeta = this._metas[backupLang];
     }
   }
@@ -31,8 +35,10 @@ export default class Message {
   get(str, args?) {
     let msg = this._currentMeta?.[str];
     if (msg === null || msg === undefined) {
-      console.warn(`Can not find the translate by ${str}, current language is ${this._lang.getLang()}`);
-      return '';
+      console.warn(
+        `Can not find the translate by ${str}, current language is ${this._lang.getLang()}`
+      );
+      return "";
     }
     if (args) {
       try {
@@ -41,7 +47,7 @@ export default class Message {
         return msg;
       } catch (err) {
         console.warn(`Format the translate failed`, err);
-        return '';
+        return "";
       }
     }
     return msg;
@@ -51,10 +57,10 @@ export default class Message {
     const msg = this.get(str, args);
     if (msg) {
       if (this._createElement === null) {
-        console.warn('Please set createElement parameter by constructor');
+        console.warn("Please set createElement parameter by constructor");
         return;
       }
-      const el = this._createElement('span', {
+      const el = this._createElement("span", {
         dangerouslySetInnerHTML: {
           __html: msg,
         },
