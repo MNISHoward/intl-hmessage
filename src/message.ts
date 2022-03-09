@@ -56,8 +56,10 @@ export default class Message {
   getHtml(str, args?) {
     const msg = this.get(str, args);
     if (msg) {
-      if (this._createElement === null) {
-        console.warn("Please set createElement parameter by constructor");
+      if (typeof this._createElement !== "function") {
+        console.warn(
+          "Please set createElement parameter by constructor and it must be a function"
+        );
         return;
       }
       const el = this._createElement("span", {
